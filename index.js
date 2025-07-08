@@ -12,7 +12,9 @@ class Game {
     this.eventInterval = 200;
     this.eventUpdate = false;
 
-    this.player = new Keyboard1(this, 0, 0, 0, 1, "magenta");
+    this.player1;
+    this.player2;
+    this.gameObjects;
 
     window.addEventListener("resize", (e) => {
       this.resize(e.currentTarget.innerWidth, e.currentTarget.innerHeight);
@@ -28,6 +30,10 @@ class Game {
     this.height = this.canvas.height;
     this.columns = Math.floor(this.width / this.cellSize);
     this.rows = Math.floor(this.height / this.cellSize);
+
+    this.player1 = new Keyboard1(this, 0, 0, 1, 0, "blue");
+    this.player2 = new Keyboard2(this, this.columns - 1, 0, 0, 1, "magenta");
+    this.gameObjects = [this.player1, this.player2];
   }
 
   drawGrid() {
@@ -58,8 +64,10 @@ class Game {
     if (this.eventUpdate) {
       this.ctx.clearRect(0, 0, this.width, this.height);
       this.drawGrid();
-      this.player.draw();
-      this.player.update();
+      this.gameObjects.forEach((object) => {
+        object.draw();
+        object.update();
+      });
     }
   }
 }

@@ -73,3 +73,16 @@ class Keyboard1 extends Player {
     });
   }
 }
+
+class Keyboard2 extends Player {
+  constructor(game, x, y, speedX, speedY, color) {
+    super(game, x, y, speedX, speedY, color);
+
+    window.addEventListener("keydown", (e) => {
+      if (e.key.toLowerCase() === "w") this.turnUp();
+      else if (e.key.toLowerCase() === "s") this.turnDown();
+      else if (e.key.toLowerCase() === "a") this.turnLeft();
+      else if (e.key.toLowerCase() === "d") this.turnRight();
+    });
+  }
+}
