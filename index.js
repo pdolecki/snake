@@ -12,7 +12,7 @@ class Game {
     this.eventInterval = 200;
     this.eventUpdate = false;
 
-    this.player = new Player(this, 0, 0, 0, 1, 'magenta');
+    this.player = new Keyboard1(this, 0, 0, 0, 1, "magenta");
 
     window.addEventListener("resize", (e) => {
       this.resize(e.currentTarget.innerWidth, e.currentTarget.innerHeight);
