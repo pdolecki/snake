@@ -16,6 +16,7 @@ class Game {
     this.player2;
     this.player3;
     this.player4;
+    this.food;
     this.gameObjects;
 
     window.addEventListener("resize", (e) => {
@@ -28,6 +29,8 @@ class Game {
     this.canvas.width = width - (width % this.cellSize);
     this.canvas.height = height - (height % this.cellSize);
     this.ctx.fillStyle = "blue";
+    this.ctx.font = "50px Impact";
+    this.ctx.textBaseline = "top";
     this.width = this.canvas.width;
     this.height = this.canvas.height;
     this.columns = Math.floor(this.width / this.cellSize);
@@ -44,7 +47,14 @@ class Game {
       "yellow"
     );
     this.player4 = new ComputerAi(this, 0, this.rows - 1, 0, -1, "yellow");
-    this.gameObjects = [this.player1, this.player2, this.player3, this.player4];
+    this.food = new Food(this);
+    this.gameObjects = [
+      this.player1,
+      this.player2,
+      this.player3,
+      this.player4,
+      this.food,
+    ];
   }
 
   drawGrid() {
@@ -58,6 +68,33 @@ class Game {
         );
       }
     }
+  }
+
+  drawStatusText() {
+    this.ctx.fillText(
+      "P1: " + this.player1.score,
+      this.cellSize,
+      this.cellSize
+    );
+    this.ctx.fillText(
+      "P2: " + this.player2.score,
+      this.cellSize,
+      this.cellSize * 2
+    );
+    this.ctx.fillText(
+      "P3: " + this.player3.score,
+      this.cellSize,
+      this.cellSize * 3
+    );
+    this.ctx.fillText(
+      "P4: " + this.player4.score,
+      this.cellSize,
+      this.cellSize * 4
+    );
+  }
+
+  checkCollision(a, b) {
+    return a.x === b.x && a.y === b.y;
   }
 
   handlePeriodicEvents(deltaTime) {
@@ -79,6 +116,7 @@ class Game {
         object.draw();
         object.update();
       });
+      this.drawStatusText();
     }
   }
 }
