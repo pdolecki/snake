@@ -86,3 +86,30 @@ class Keyboard2 extends Player {
     });
   }
 }
+
+class ComputerAi extends Player {
+  constructor(game, x, y, speedX, speedY, color) {
+    super(game, x, y, speedX, speedY, color);
+    this.turnTimer = 0;
+    this.turnInterval = Math.floor(Math.random() * this.game.columns + 1);
+  }
+
+  update() {
+    super.update();
+    if (this.turnTimer < this.turnInterval) {
+      this.turnTimer += 1;
+    } else {
+      this.turnTimer = 0;
+      this.turn();
+      this.turnInterval = Math.floor(Math.random() * this.game.columns + 1);
+    }
+  }
+
+  turn() {
+    if (this.speedY === 0) {
+      Math.random() < 0.5 ? this.turnUp() : this.turnDown();
+    } else if (this.speedX === 0) {
+      Math.random < 0.5 ? this.turnLeft() : this.turnRight();
+    }
+  }
+}

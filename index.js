@@ -14,6 +14,8 @@ class Game {
 
     this.player1;
     this.player2;
+    this.player3;
+    this.player4;
     this.gameObjects;
 
     window.addEventListener("resize", (e) => {
@@ -32,8 +34,17 @@ class Game {
     this.rows = Math.floor(this.height / this.cellSize);
 
     this.player1 = new Keyboard1(this, 0, 0, 1, 0, "blue");
-    this.player2 = new Keyboard2(this, this.columns - 1, 0, 0, 1, "magenta");
-    this.gameObjects = [this.player1, this.player2];
+    this.player2 = new ComputerAi(this, this.columns - 1, 0, 0, 1, "yellow");
+    this.player3 = new ComputerAi(
+      this,
+      this.columns - 1,
+      this.rows - 1,
+      -1,
+      0,
+      "yellow"
+    );
+    this.player4 = new ComputerAi(this, 0, this.rows - 1, 0, -1, "yellow");
+    this.gameObjects = [this.player1, this.player2, this.player3, this.player4];
   }
 
   drawGrid() {
