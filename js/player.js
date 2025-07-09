@@ -10,6 +10,8 @@ class Player {
     this.height = this.game.cellSize;
     this.moving = true;
     this.score = 0;
+    this.length = 2;
+    this.segments = [];
   }
 
   update() {
@@ -17,6 +19,7 @@ class Player {
     if (this.game.checkCollision(this, this.game.food)) {
       this.game.food.reset();
       this.score++;
+      this.length++;
     }
     // boundaries
     const leftBoundary = this.x <= 0 && this.speedX < 0;
@@ -30,17 +33,24 @@ class Player {
     if (this.moving) {
       this.x += this.speedX;
       this.y += this.speedY;
+      this.segments.unshift({ x: this.x, y: this.y });
+      if (this.segments.length > this.length) {
+        this.segments.pop();
+      }
     }
   }
 
   draw() {
-    this.game.ctx.fillStyle = this.color;
-    this.game.ctx.fillRect(
-      this.x * this.game.cellSize,
-      this.y * this.game.cellSize,
-      this.width,
-      this.height
-    );
+    this.segments.forEach((segment, index) => {
+      if (index === 0) this.game.ctx.fillStyle = "gold";
+      else this.game.ctx.fillStyle = this.color;
+      this.game.ctx.fillRect(
+        segment.x * this.game.cellSize,
+        segment.y * this.game.cellSize,
+        this.width,
+        this.height
+      );
+    });
   }
 
   turnUp() {
