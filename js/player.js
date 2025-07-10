@@ -33,7 +33,7 @@ class Player {
     ) {
       this.moving = false;
     }
-    
+
     if (this.moving) {
       this.x += this.speedX;
       this.y += this.speedY;
@@ -58,7 +58,7 @@ class Player {
   }
 
   turnUp() {
-    if (this.speedY === 0) {
+    if (this.speedY === 0 && this.readyToTurn) {
       this.speedX = 0;
       this.speedY = -1;
       this.moving = true;
@@ -142,7 +142,7 @@ class ComputerAi extends Player {
     if (this.speedY === 0) {
       Math.random() < 0.5 ? this.turnUp() : this.turnDown();
     } else if (this.speedX === 0) {
-      Math.random < 0.5 ? this.turnLeft() : this.turnRight();
+      Math.random() < 0.5 ? this.turnLeft() : this.turnRight();
     }
   }
 }
