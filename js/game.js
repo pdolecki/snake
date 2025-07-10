@@ -18,6 +18,7 @@ class Game {
     this.player4;
     this.food;
     this.gameObjects;
+    this.gameUi = new Ui(this);
 
     window.addEventListener("resize", (e) => {
       this.resize(e.currentTarget.innerWidth, e.currentTarget.innerHeight);
@@ -36,17 +37,34 @@ class Game {
     this.columns = Math.floor(this.width / this.cellSize);
     this.rows = Math.floor(this.height / this.cellSize);
 
-    this.player1 = new Keyboard1(this, 0, 0, 1, 0, "blue");
-    this.player2 = new ComputerAi(this, this.columns - 1, 0, 0, 1, "yellow");
+    this.player1 = new Keyboard1(this, 0, 0, 1, 0, "blue", "Player");
+    this.player2 = new ComputerAi(
+      this,
+      this.columns - 1,
+      0,
+      0,
+      1,
+      "yellow",
+      "AI-1"
+    );
     this.player3 = new ComputerAi(
       this,
       this.columns - 1,
       this.rows - 1,
       -1,
       0,
-      "yellow"
+      "yellow",
+      "AI-2"
     );
-    this.player4 = new ComputerAi(this, 0, this.rows - 1, 0, -1, "yellow");
+    this.player4 = new ComputerAi(
+      this,
+      0,
+      this.rows - 1,
+      0,
+      -1,
+      "yellow",
+      "AI-3"
+    );
     this.food = new Food(this);
     this.gameObjects = [
       this.player1,
@@ -68,29 +86,6 @@ class Game {
         );
       }
     }
-  }
-
-  drawStatusText() {
-    this.ctx.fillText(
-      "P1: " + this.player1.score,
-      this.cellSize,
-      this.cellSize
-    );
-    this.ctx.fillText(
-      "P2: " + this.player2.score,
-      this.cellSize,
-      this.cellSize * 2
-    );
-    this.ctx.fillText(
-      "P3: " + this.player3.score,
-      this.cellSize,
-      this.cellSize * 3
-    );
-    this.ctx.fillText(
-      "P4: " + this.player4.score,
-      this.cellSize,
-      this.cellSize * 4
-    );
   }
 
   checkCollision(a, b) {
@@ -116,8 +111,8 @@ class Game {
         object.draw();
         object.update();
       });
-      this.drawStatusText();
     }
+    this.gameUi.update();
   }
 }
 

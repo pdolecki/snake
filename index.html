@@ -5,11 +5,30 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Snake</title>
     <link rel="stylesheet" href="./css/styles.css" />
+    <script src="./js/ui.js" async></script>
     <script src="./js/food.js" async></script>
     <script src="./js/player.js" async></script>
     <script src="./js/game.js" async></script>
   </head>
   <body>
     <canvas id="canvas1"></canvas>
+
+    <div id="controls">
+      <div id="buttons">
+        <button id="startButton">Start</button>
+        <button id="debugButton">Debug</button>
+        <button id="fullScreenButton">Full Screen</button>
+      </div>
+      <div id="scoreScreen">
+        <div class="left">
+          <p id="scoreBoard1">Player 1</p>
+          <p id="scoreBoard2">Player 2</p>
+        </div>
+        <div class="right">
+          <p id="scoreBoard3">Player 3</p>
+          <p id="scoreBoard4">Player 4</p>
+        </div>
+      </div>
+    </div>
   </body>
 </html>
