@@ -7,6 +7,7 @@ class Game {
     this.cellSize = 50;
     this.columns;
     this.rows;
+    this.topMargin = 2;
 
     this.eventTimer = 0;
     this.eventInterval = 200;
@@ -17,6 +18,7 @@ class Game {
     this.player3;
     this.player4;
     this.food;
+    this.background;
     this.gameObjects;
     this.gameUi = new Ui(this);
 
@@ -36,7 +38,7 @@ class Game {
     this.height = this.canvas.height;
     this.columns = Math.floor(this.width / this.cellSize);
     this.rows = Math.floor(this.height / this.cellSize);
-
+    this.background = new Background(this);
     this.player1 = new Keyboard1(this, 0, 0, 1, 0, "blue", "Player");
     this.player2 = new ComputerAi(
       this,
@@ -106,6 +108,7 @@ class Game {
     this.handlePeriodicEvents(deltaTime);
     if (this.eventUpdate) {
       this.ctx.clearRect(0, 0, this.width, this.height);
+      this.background.draw();
       this.drawGrid();
       this.gameObjects.forEach((object) => {
         object.draw();
