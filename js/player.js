@@ -63,7 +63,7 @@ class Player {
   }
 
   turnUp() {
-    if (this.speedY === 0 && this.readyToTurn) {
+    if (this.speedY === 0 && this.y > this.game.topMargin && this.readyToTurn) {
       this.speedX = 0;
       this.speedY = -1;
       this.moving = true;
@@ -72,7 +72,7 @@ class Player {
   }
 
   turnDown() {
-    if (this.speedY === 0 && this.readyToTurn) {
+    if (this.speedY === 0 && this.y < this.game.rows - 1 && this.readyToTurn) {
       this.speedX = 0;
       this.speedY = 1;
       this.moving = true;
@@ -81,7 +81,7 @@ class Player {
   }
 
   turnLeft() {
-    if (this.speedX === 0 && this.readyToTurn) {
+    if (this.speedX === 0 && this.x > 0 && this.readyToTurn) {
       this.speedX = -1;
       this.speedY = 0;
       this.moving = true;
@@ -90,7 +90,11 @@ class Player {
   }
 
   turnRight() {
-    if (this.speedX === 0 && this.readyToTurn) {
+    if (
+      this.speedX === 0 &&
+      this.x < this.game.columns - 1 &&
+      this.readyToTurn
+    ) {
       this.speedX = 1;
       this.speedY = 0;
       this.moving = true;
@@ -129,7 +133,7 @@ class ComputerAi extends Player {
   constructor(game, x, y, speedX, speedY, color, name) {
     super(game, x, y, speedX, speedY, color, name);
     this.turnTimer = 0;
-    this.turnInterval = Math.floor(Math.random() * this.game.columns + 1);
+    this.turnInterval;
   }
 
   update() {
@@ -139,7 +143,7 @@ class ComputerAi extends Player {
     } else {
       this.turnTimer = 0;
       this.turn();
-      this.turnInterval = Math.floor(Math.random() * this.game.columns + 1);
+      this.turnInterval = Math.floor(Math.random() * 8) + 1;
     }
   }
 
