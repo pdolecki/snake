@@ -160,6 +160,14 @@ class Game {
     return a.x === b.x && a.y === b.y;
   }
 
+  toggleFullScreen() {
+    if (!document.fullscreenElement) {
+      document.documentElement.requestFullscreen();
+    } else if (document.exitFullscreen) {
+      document.exitFullscreen();
+    }
+  }
+
   handlePeriodicEvents(deltaTime) {
     if (this.eventTimer < this.eventInterval) {
       this.eventTimer += deltaTime;
