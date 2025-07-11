@@ -45,21 +45,44 @@ class Game {
     this.start();
   }
 
-  start() {
-    if (!this.gameOver) {
-      this.gameUi.triggerGameOver();
-    } else {
-      this.gameOver = false;
-      this.gameUi.gameplayUi();
+  initPlayer1() {
+    const name = this.gameUi.player1name.value;
+    if (this.gameUi.player1controls.value === "arrows") {
       this.player1 = new Keyboard1(
         this,
         0,
         this.topMargin,
         1,
         0,
-        "blue",
-        "Player"
+        "orangered",
+        name
       );
+    } else {
+      this.player1 = new ComputerAi(
+        this,
+        0,
+        this.topMargin,
+        1,
+        0,
+        "yellow",
+        name
+      );
+    }
+  }
+
+  initPlayer2() {
+    const name = this.gameUi.player2name.value;
+    if (this.gameUi.player1controls.value === "wsad") {
+      this.player2 = new Keyboard2(
+        this,
+        this.columns - 1,
+        this.topMargin,
+        0,
+        1,
+        "blue",
+        name
+      );
+    } else {
       this.player2 = new ComputerAi(
         this,
         this.columns - 1,
@@ -67,26 +90,47 @@ class Game {
         0,
         1,
         "yellow",
-        "AI-1"
+        name
       );
-      this.player3 = new ComputerAi(
-        this,
-        this.columns - 1,
-        this.rows - 1,
-        -1,
-        0,
-        "yellow",
-        "AI-2"
-      );
-      this.player4 = new ComputerAi(
-        this,
-        0,
-        this.rows - 1,
-        0,
-        -1,
-        "yellow",
-        "AI-3"
-      );
+    }
+  }
+
+  initPlayer3() {
+    const name = this.gameUi.player3name.value;
+    this.player3 = new ComputerAi(
+      this,
+      this.columns - 1,
+      this.rows - 1,
+      -1,
+      0,
+      "yellow",
+      name
+    );
+  }
+
+  initPlayer4() {
+    const name = this.gameUi.player4name.value;
+    this.player4 = new ComputerAi(
+      this,
+      0,
+      this.rows - 1,
+      0,
+      -1,
+      "yellow",
+      name
+    );
+  }
+
+  start() {
+    if (!this.gameOver) {
+      this.gameUi.triggerGameOver();
+    } else {
+      this.gameOver = false;
+      this.gameUi.gameplayUi();
+      this.initPlayer1();
+      this.initPlayer2();
+      this.initPlayer3();
+      this.initPlayer4();
       this.food = new Food(this);
       this.gameObjects = [
         this.player1,
