@@ -13,6 +13,9 @@ class Game {
     this.eventInterval = 200;
     this.eventUpdate = false;
 
+    this.gameOver = true;
+    this.winningScore = 2;
+
     this.player1;
     this.player2;
     this.player3;
@@ -39,42 +42,61 @@ class Game {
     this.columns = Math.floor(this.width / this.cellSize);
     this.rows = Math.floor(this.height / this.cellSize);
     this.background = new Background(this);
-    this.player1 = new Keyboard1(this, 0, 0, 1, 0, "blue", "Player");
-    this.player2 = new ComputerAi(
-      this,
-      this.columns - 1,
-      0,
-      0,
-      1,
-      "yellow",
-      "AI-1"
-    );
-    this.player3 = new ComputerAi(
-      this,
-      this.columns - 1,
-      this.rows - 1,
-      -1,
-      0,
-      "yellow",
-      "AI-2"
-    );
-    this.player4 = new ComputerAi(
-      this,
-      0,
-      this.rows - 1,
-      0,
-      -1,
-      "yellow",
-      "AI-3"
-    );
-    this.food = new Food(this);
-    this.gameObjects = [
-      this.player1,
-      this.player2,
-      this.player3,
-      this.player4,
-      this.food,
-    ];
+    this.start();
+  }
+
+  start() {
+    if (!this.gameOver) {
+      this.gameUi.triggerGameOver();
+    } else {
+      this.gameOver = false;
+      this.gameUi.gameplayUi();
+      this.player1 = new Keyboard1(
+        this,
+        0,
+        this.topMargin,
+        1,
+        0,
+        "blue",
+        "Player"
+      );
+      this.player2 = new ComputerAi(
+        this,
+        this.columns - 1,
+        this.topMargin,
+        0,
+        1,
+        "yellow",
+        "AI-1"
+      );
+      this.player3 = new ComputerAi(
+        this,
+        this.columns - 1,
+        this.rows - 1,
+        -1,
+        0,
+        "yellow",
+        "AI-2"
+      );
+      this.player4 = new ComputerAi(
+        this,
+        0,
+        this.rows - 1,
+        0,
+        -1,
+        "yellow",
+        "AI-3"
+      );
+      this.food = new Food(this);
+      this.gameObjects = [
+        this.player1,
+        this.player2,
+        this.player3,
+        this.player4,
+        this.food,
+      ];
+      this.ctx.clearRect(0, 0, this.width, this.height);
+    }
   }
 
   drawGrid() {
@@ -106,7 +128,7 @@ class Game {
 
   render(deltaTime) {
     this.handlePeriodicEvents(deltaTime);
-    if (this.eventUpdate) {
+    if (this.eventUpdate && !this.gameOver) {
       this.ctx.clearRect(0, 0, this.width, this.height);
       this.background.draw();
       this.drawGrid();
@@ -114,8 +136,8 @@ class Game {
         object.draw();
         object.update();
       });
+      this.gameUi.update();
     }
-    this.gameUi.update();
   }
 }
 
