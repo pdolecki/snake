@@ -23,8 +23,13 @@ class Game {
     this.food;
     this.background;
     this.gameObjects;
+    this.debug = true;
     this.gameUi = new Ui(this);
 
+    window.addEventListener("keyup", (e) => {
+      if (e.key === "-") this.toggleFullScreen();
+      else if (e.key === "+") this.debug = !this.debug;
+    });
     window.addEventListener("resize", (e) => {
       this.resize(e.currentTarget.innerWidth, e.currentTarget.innerHeight);
     });
@@ -183,7 +188,7 @@ class Game {
     if (this.eventUpdate && !this.gameOver) {
       this.ctx.clearRect(0, 0, this.width, this.height);
       this.background.draw();
-      this.drawGrid();
+      if (this.debug) this.drawGrid();
       this.gameObjects.forEach((object) => {
         object.draw();
         object.update();
