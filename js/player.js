@@ -1,5 +1,5 @@
 class Player {
-  constructor(game, x, y, speedX, speedY, color, name) {
+  constructor(game, x, y, speedX, speedY, color, name, image) {
     this.game = game;
     this.x = x;
     this.y = y;
@@ -26,7 +26,7 @@ class Player {
     }
     this.readyToTurn = true;
     this.name = name;
-    this.image = document.getElementById("void_wolf");
+    this.image = image;
     this.spriteWidth = 200;
     this.spriteHeight = 200;
   }
@@ -279,8 +279,8 @@ class Player {
 }
 
 class Keyboard1 extends Player {
-  constructor(game, x, y, speedX, speedY, color, name) {
-    super(game, x, y, speedX, speedY, color, name);
+  constructor(game, x, y, speedX, speedY, color, name, image) {
+    super(game, x, y, speedX, speedY, color, name, image);
 
     window.addEventListener("keydown", (e) => {
       if (e.key === "ArrowUp") this.turnUp();
@@ -292,8 +292,8 @@ class Keyboard1 extends Player {
 }
 
 class Keyboard2 extends Player {
-  constructor(game, x, y, speedX, speedY, color, name) {
-    super(game, x, y, speedX, speedY, color, name);
+  constructor(game, x, y, speedX, speedY, color, name, image) {
+    super(game, x, y, speedX, speedY, color, name, image);
 
     window.addEventListener("keydown", (e) => {
       if (e.key.toLowerCase() === "w") this.turnUp();
@@ -305,8 +305,8 @@ class Keyboard2 extends Player {
 }
 
 class ComputerAi extends Player {
-  constructor(game, x, y, speedX, speedY, color, name) {
-    super(game, x, y, speedX, speedY, color, name);
+  constructor(game, x, y, speedX, speedY, color, name, image) {
+    super(game, x, y, speedX, speedY, color, name, image);
     this.turnTimer = 0;
     this.turnInterval;
   }
