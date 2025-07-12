@@ -13,8 +13,10 @@ class Player {
     this.length = 3;
     this.segments = [];
     for (let i = 0; i < this.length; i++) {
-      this.x += this.speedX;
-      this.y += this.speedY;
+      if (i > 0) {
+        this.x += this.speedX;
+        this.y += this.speedY;
+      }
       this.segments.unshift({
         x: this.x,
         y: this.y,
@@ -24,7 +26,7 @@ class Player {
     }
     this.readyToTurn = true;
     this.name = name;
-    this.image = document.getElementById("snake_corgi");
+    this.image = document.getElementById("void_wolf");
     this.spriteWidth = 200;
     this.spriteHeight = 200;
   }
@@ -140,20 +142,52 @@ class Player {
     if (index === 0) {
       // up
       if (segment.y < nextSegment.y) {
-        segment.frameX = 1;
-        segment.frameY = 2;
+        if (
+          this.game.food.y === segment.y - 1 &&
+          this.game.food.x === segment.x
+        ) {
+          segment.frameX = 7;
+          segment.frameY = 1;
+        } else {
+          segment.frameX = 1;
+          segment.frameY = 2;
+        }
         //down
       } else if (segment.y > nextSegment.y) {
-        segment.frameX = 0;
-        segment.frameY = 4;
+        if (
+          this.game.food.y === segment.y + 1 &&
+          this.game.food.x === segment.x
+        ) {
+          segment.frameX = 7;
+          segment.frameY = 3;
+        } else {
+          segment.frameX = 0;
+          segment.frameY = 4;
+        }
         // left
       } else if (segment.x < nextSegment.x) {
-        segment.frameX = 0;
-        segment.frameY = 0;
+        if (
+          this.game.food.x === segment.x - 1 &&
+          this.game.food.y === segment.y
+        ) {
+          segment.frameX = 2;
+          segment.frameY = 4;
+        } else {
+          segment.frameX = 4;
+          segment.frameY = 2;
+        }
         // right
       } else if (segment.x > nextSegment.x) {
-        segment.frameX = 2;
-        segment.frameY = 1;
+        if (
+          this.game.food.x === segment.x + 1 &&
+          this.game.food.y === segment.y
+        ) {
+          segment.frameX = 4;
+          segment.frameY = 4;
+        } else {
+          segment.frameX = 6;
+          segment.frameY = 3;
+        }
       }
       // TAIL
     } else if (index === this.segments.length - 1) {

@@ -1,4 +1,7 @@
 # 🐍 Snake Game – Classic Arcade Fun in the Browser
+Project was developed during course made by Frank Dvorak
+Front End Web Developer & Instructor at Frank's Laboratory
+https://www.udemy.com/course/make-grid-based-games-with-javascript/?couponCode=KEEPLEARNING
 
 Live Demo: https://pd-snake.netlify.app
 
