@@ -3,6 +3,7 @@ class Food {
     this.game = game;
     this.x;
     this.y;
+    this.image = document.getElementById("magic_berry1");
     this.reset();
   }
 
@@ -12,8 +13,17 @@ class Food {
   }
 
   draw() {
-    this.game.ctx.fillStyle = "white";
-    this.game.ctx.fillRect(
+    if (this.game.debug) {
+      this.game.ctx.fillStyle = "white";
+      this.game.ctx.fillRect(
+        this.x * this.game.cellSize,
+        this.y * this.game.cellSize,
+        this.game.cellSize,
+        this.game.cellSize
+      );
+    }
+    this.game.ctx.drawImage(
+      this.image,
       this.x * this.game.cellSize,
       this.y * this.game.cellSize,
       this.game.cellSize,
