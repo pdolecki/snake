@@ -33,6 +33,9 @@ class Ui {
     this.player2name = document.getElementById("player2name");
     this.player3name = document.getElementById("player3name");
     this.player4name = document.getElementById("player4name");
+    // messages
+    this.message1 = document.getElementById("message1");
+    this.message2 = document.getElementById("message2");
   }
 
   update() {
@@ -46,9 +49,16 @@ class Ui {
       this.game.player4.name + ": " + this.game.player4.score;
   }
 
-  triggerGameOver() {
+  triggerGameOver(winner) {
     this.game.gameOver = true;
     this.gameOverUi();
+    if (winner) {
+      this.message1.innerText = winner.name + " wins!";
+      this.message2.innerText = "Winning score " + winner.score;
+    } else {
+      this.message1.innerText = "Welcome to the game!";
+      this.message2.innerText = "Choose your players!";
+    }
   }
 
   gameplayUi() {

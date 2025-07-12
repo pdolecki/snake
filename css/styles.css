@@ -55,6 +55,7 @@ body {
   justify-content: space-between;
   column-gap: 25px;
   width: 300px;
+  margin: 0 auto;
 }
 
 #playerChoice {
@@ -68,6 +69,7 @@ body {
 
 #gameMenu {
   display: block;
+  padding-top: 10px;
 }
 
 #gameOverScreen {
@@ -77,4 +79,14 @@ body {
   height: 100%;
   background-repeat: no-repeat;
   background-size: cover;
+}
+
+#message1 {
+  font-size: 30px;
+  text-align: center;
+}
+
+#message2 {
+  font-size: 20px;
+  text-align: center;
 }

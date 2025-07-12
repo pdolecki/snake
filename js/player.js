@@ -58,7 +58,7 @@ class Player {
 
     // win condition
     if (this.score >= this.game.winningScore) {
-      this.game.gameUi.triggerGameOver();
+      this.game.gameUi.triggerGameOver(this);
     }
   }
 
