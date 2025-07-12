@@ -12,6 +12,7 @@ class Game {
     this.eventTimer = 0;
     this.eventInterval = 200;
     this.eventUpdate = false;
+    this.timer = 0;
 
     this.gameOver = true;
     this.winningScore = 10;
@@ -34,7 +35,6 @@ class Game {
       this.resize(e.currentTarget.innerWidth, e.currentTarget.innerHeight);
     });
     this.resize(window.innerWidth, window.innerHeight);
-    // this.start();
   }
 
   resize(width, height) {
@@ -141,6 +141,7 @@ class Game {
       this.gameUi.triggerGameOver();
     } else {
       this.gameOver = false;
+      this.timer = 0;
       this.gameUi.gameplayUi();
       this.initPlayer1();
       this.initPlayer2();
@@ -175,6 +176,10 @@ class Game {
     return a.x === b.x && a.y === b.y;
   }
 
+  formatTimer() {
+    return (this.timer * 0.001).toFixed(1);
+  }
+
   toggleFullScreen() {
     if (!document.fullscreenElement) {
       document.documentElement.requestFullscreen();
@@ -195,6 +200,7 @@ class Game {
 
   render(deltaTime) {
     this.handlePeriodicEvents(deltaTime);
+    if (!this.gameOver) this.timer += deltaTime;
     if (this.eventUpdate && !this.gameOver) {
       this.ctx.clearRect(0, 0, this.width, this.height);
       this.background.draw();

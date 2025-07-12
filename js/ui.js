@@ -59,7 +59,8 @@ class Ui {
     this.gameOverUi();
     if (winner) {
       this.message1.innerText = winner.name + " wins!";
-      this.message2.innerText = "Winning score " + winner.score;
+      this.message2.innerText =
+        "Game time " + this.game.formatTimer() + " seconds!";
     } else {
       this.message1.innerText = "Welcome to the game!";
       this.message2.innerText = "Choose your players!";
