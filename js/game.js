@@ -14,7 +14,7 @@ class Game {
     this.eventUpdate = false;
 
     this.gameOver = true;
-    this.winningScore = 2;
+    this.winningScore = 100;
 
     this.player1;
     this.player2;
@@ -72,7 +72,7 @@ class Game {
 
   initPlayer2() {
     const name = this.gameUi.player2name.value;
-    if (this.gameUi.player1controls.value === "wsad") {
+    if (this.gameUi.player2controls.value === "wsad") {
       this.player2 = new Keyboard2(
         this,
         this.columns - 1,
