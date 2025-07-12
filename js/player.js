@@ -185,8 +185,8 @@ class Player {
           segment.frameX = 2;
           segment.frameY = 4;
         } else {
-          segment.frameX = 4;
-          segment.frameY = 2;
+          segment.frameX = 0;
+          segment.frameY = 0;
         }
         // right
       } else if (segment.x > nextSegment.x) {
@@ -197,8 +197,8 @@ class Player {
           segment.frameX = 4;
           segment.frameY = 4;
         } else {
-          segment.frameX = 6;
-          segment.frameY = 3;
+          segment.frameX = 2;
+          segment.frameY = 1;
         }
       }
       // TAIL
@@ -309,6 +309,8 @@ class ComputerAi extends Player {
     super(game, x, y, speedX, speedY, color, name, image);
     this.turnTimer = 0;
     this.turnInterval;
+    this.ai_difficulty = document.getElementById("ai_difficulty").value;
+    this.turnInterval = Math.floor(Math.random() * this.ai_difficulty);
   }
 
   update() {
@@ -318,15 +320,32 @@ class ComputerAi extends Player {
     } else {
       this.turnTimer = 0;
       this.turn();
-      this.turnInterval = Math.floor(Math.random() * 8) + 1;
+      this.turnInterval = Math.floor(Math.random() * this.ai_difficulty);
     }
   }
 
   turn() {
-    if (this.speedY === 0) {
-      Math.random() < 0.5 ? this.turnUp() : this.turnDown();
-    } else if (this.speedX === 0) {
-      Math.random() < 0.5 ? this.turnLeft() : this.turnRight();
+    const food = this.game.food;
+    // dont turn if moving towards food
+    if (food.x === this.x && food.y < this.y && this.speedY < 0) return;
+    else if (food.x === this.x && food.y > this.y && this.speedY > 0) return;
+    else if (food.y === this.y && food.x < this.x && this.speedX < 0) return;
+    else if (food.y === this.y && food.x > this.x && this.speedX > 0) return;
+
+    if (food.x < this.x && this.speedX === 0) {
+      this.turnLeft();
+    } else if (food.x > this.x && this.speedX === 0) {
+      this.turnRight();
+    } else if (food.y < this.y && this.speedY === 0) {
+      this.turnUp();
+    } else if (food.y > this.y && this.speedY === 0) {
+      this.turnDown();
+    } else {
+      if (this.speedY === 0) {
+        Math.random() < 0.5 ? this.turnUp() : this.turnDown();
+      } else if (this.speedX === 0) {
+        Math.random() < 0.5 ? this.turnLeft() : this.turnRight();
+      }
     }
   }
 }
