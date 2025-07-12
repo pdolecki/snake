@@ -35,9 +35,21 @@ class Player {
     this.readyToTurn = true;
     // collisions
     if (this.game.checkCollision(this, this.game.food)) {
+      // NOT EDIBLE
+      if (this.game.food.frameY === 1) {
+        this.score--;
+        if (this.length > 2) {
+          this.length--;
+          if (this.segments.length > this.length) {
+            this.segments.pop();
+          }
+        }
+        // REGULAR FOOD
+      } else {
+        this.score++;
+        this.length++;
+      }
       this.game.food.reset();
-      this.score++;
-      this.length++;
     }
     // boundaries
     if (
