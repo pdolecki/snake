@@ -35,9 +35,11 @@ class Player {
     this.readyToTurn = true;
     // collisions
     if (this.game.checkCollision(this, this.game.food)) {
+      let color;
       // NOT EDIBLE
       if (this.game.food.frameY === 1) {
         this.score--;
+        color = "black";
         if (this.length > 2) {
           this.length--;
           if (this.segments.length > this.length) {
@@ -48,6 +50,17 @@ class Player {
       } else {
         this.score++;
         this.length++;
+        color = "gold";
+      }
+      for (let i = 0; i < 5; i++) {
+        const particle = this.game.getParticle();
+        if (particle) {
+          particle.start(
+            this.game.food.x * this.game.cellSize + this.game.cellSize * 0.5,
+            this.game.food.y * this.game.cellSize + this.game.cellSize * 0.5,
+            color
+          );
+        }
       }
       this.game.food.reset();
     }
