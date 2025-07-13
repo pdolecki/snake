@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Snake</title>
     <link rel="stylesheet" href="./css/styles.css" />
+    <script src="./js/sounds.js" async></script>
     <script src="./js/particles.js" async></script>
     <script src="./js/ui.js" async></script>
     <script src="./js/food.js" async></script>
@@ -117,8 +118,8 @@
         <label for="ai_difficulty">Difficulty:</label>
         <select name="ai_difficulty" id="ai_difficulty">
           <option value="40">Slow noodles</option>
-          <option value="15" selected>Challengers</option>
-          <option value="1">Ultimate hunger</option>
+          <option value="20" selected>Challengers</option>
+          <option value="3">Ultimate hunger</option>
         </select>
       </div>
     </div>
@@ -126,18 +127,34 @@
     <canvas id="canvas2"></canvas>
 
     <div class="assets">
+      <!-- background -->
       <img
         id="forest_margin_repeat"
         src="assets/images/forest_margin_repeat_1600x600.png"
       />
+
+      <!-- food -->
       <img id="magic_berry1" src="assets/images/magic_berry1.png" />
       <img id="mushroom_sprite" src="assets/images/mushroom_sprite.png" />
       <img id="food" src="assets/images/food.png" />
 
+      <!-- snakes -->
       <img id="snake_corgi" src="assets/images/snake_corgi.png" />
       <img id="void_wolf" src="assets/images/void_wolf.png" />
       <img id="sticky_saberhound" src="assets/images/sticky_saberhound.png" />
       <img id="spectral_schnoodle" src="assets/images/spectral_schnoodle.png" />
+
+      <!-- sounds -->
+      <audio id="bite1" src="assets/sounds/bite1.mp3"></audio>
+      <audio id="bite2" src="assets/sounds/bite2.mp3"></audio>
+      <audio id="bite3" src="assets/sounds/bite3.mp3"></audio>
+      <audio id="bite4" src="assets/sounds/bite4.mp3"></audio>
+      <audio id="bite5" src="assets/sounds/bite5.mp3"></audio>
+      <audio id="bad_food" src="assets/sounds/bad_food.mp3"></audio>
+      <audio id="start" src="assets/sounds/start.mp3"></audio>
+      <audio id="restart" src="assets/sounds/restart.mp3"></audio>
+      <audio id="win" src="assets/sounds/win.mp3"></audio>
+      <audio id="button" src="assets/sounds/button.mp3"></audio>
     </div>
   </body>
 </html>

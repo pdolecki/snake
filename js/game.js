@@ -28,6 +28,7 @@ class Game {
     this.gameObjects;
     this.debug = false;
     this.gameUi = new Ui(this);
+    this.sound = new AudioControl();
 
     this.particles = [];
     this.numberOfParticles = 50;
@@ -151,7 +152,9 @@ class Game {
   start() {
     if (!this.gameOver) {
       this.gameUi.triggerGameOver();
+      this.sound.play(this.sound.restart);
     } else {
+      this.sound.play(this.sound.start);
       this.gameOver = false;
       this.timer = 0;
       this.gameUi.gameplayUi();

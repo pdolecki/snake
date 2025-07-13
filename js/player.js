@@ -40,6 +40,7 @@ class Player {
       if (this.game.food.frameY === 1) {
         this.score--;
         color = "black";
+        this.game.sound.play(this.game.sound.bad_food);
         if (this.length > 2) {
           this.length--;
           if (this.segments.length > this.length) {
@@ -51,6 +52,11 @@ class Player {
         this.score++;
         this.length++;
         color = "gold";
+        this.game.sound.play(
+          this.game.sound.biteSounds[
+           Math.floor( Math.random() * this.game.sound.biteSounds.length)
+          ]
+        );
       }
       for (let i = 0; i < 5; i++) {
         const particle = this.game.getParticle();
@@ -86,6 +92,7 @@ class Player {
     // win condition
     if (this.score >= this.game.winningScore) {
       this.game.gameUi.triggerGameOver(this);
+      this.game.sound.play(this.game.sound.win);
     }
   }
 
